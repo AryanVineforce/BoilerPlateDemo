@@ -52,6 +52,12 @@ import { CreateEmployeeDialogComponent } from './employee/create-employee/create
 import { CourseComponent } from './course/course.component';
 import { CreateCourseDialogComponent } from './course/create-course/create-course-dialog.component';
 import { EditCourseDialogComponent } from './course/edit-course/edit-course-dialog.component';
+import { TeacherComponent } from './teacher/teacher.component';
+import { CreateTeacherDialogComponent } from './teacher/create-teacher/create-teacher-dialog.component';
+import { EditTeacherDialogComponent } from './teacher/edit-teacher/edit-teacher-dialog.component';
+import { AddressComponent } from './address.component';
+import { EditAddressDialogComponent } from './address/edit-address/edit-address-dialog.component';
+import { CreateAddressDialogComponent } from './address/create-address/create-address-dialog.component';
 
 
 @NgModule({
@@ -95,6 +101,12 @@ import { EditCourseDialogComponent } from './course/edit-course/edit-course-dial
         CourseComponent,
         CreateCourseDialogComponent,
         EditCourseDialogComponent,
+        TeacherComponent,
+        CreateTeacherDialogComponent,
+        EditTeacherDialogComponent,
+        AddressComponent,
+        EditAddressDialogComponent,
+        CreateAddressDialogComponent,
     
       
       

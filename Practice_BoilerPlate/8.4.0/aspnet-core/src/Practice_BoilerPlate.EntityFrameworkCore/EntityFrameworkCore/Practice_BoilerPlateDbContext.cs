@@ -7,6 +7,9 @@ using Practice_BoilerPlate.Students;
 using Practice_BoilerPlate.Departments;
 using Practice_BoilerPlate.Employees;
 using Practice_BoilerPlate.Courses;
+using Practice_BoilerPlate.Teachers;
+using Practice_BoilerPlate.Addresses;
+using Practice_BoilerPlate.Subjects;
 
 namespace Practice_BoilerPlate.EntityFrameworkCore
 {
@@ -22,6 +25,9 @@ namespace Practice_BoilerPlate.EntityFrameworkCore
         public DbSet<Departmentt> Departments { get; set; }
         public DbSet<Employeee> Employees { get; set; }
         public DbSet<Course> Courses { get; set; }
-        
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet <Address>Addresses { get; set; }
+        public DbSet <Subject>Subjects { get; set; }
+
     }
 }

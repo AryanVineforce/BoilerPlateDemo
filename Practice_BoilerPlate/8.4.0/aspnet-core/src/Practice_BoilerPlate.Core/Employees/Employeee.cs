@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Practice_BoilerPlate.Departments;
+using Practice_BoilerPlate.Addresses;
 
 namespace Practice_BoilerPlate.Employees
 {
@@ -47,6 +48,8 @@ namespace Practice_BoilerPlate.Employees
         public int DepartmentId { get; set; }
 
         public virtual Departmentt Department { get; set; }
+        public int AddressId { get; set; }  // Address ki foreign key
+        public Address Address { get; set; } // Address ko navigation property ke roop me add kar rahe hain
     }
 
 }

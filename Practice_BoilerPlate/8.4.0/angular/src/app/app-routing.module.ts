@@ -12,6 +12,8 @@ import { StudentComponent } from "./student/student.component";
 import { DepartmentComponent } from "./department/department.component";
 import { EmployeeComponent } from "./employee/employee.component";
 import { CourseComponent } from "./course/course.component";
+import { TeacherComponent } from "./teacher/teacher.component";
+import { AddressComponent } from "./address.component";
 
 @NgModule({
   imports: [
@@ -52,6 +54,8 @@ import { CourseComponent } from "./course/course.component";
           { path: "department", component: DepartmentComponent },
           { path: "employee", component: EmployeeComponent },
           { path: "course", component: CourseComponent },
+          { path: "teacher", component: TeacherComponent },
+          { path: "address", component: AddressComponent },
         ],
       },
     ]),

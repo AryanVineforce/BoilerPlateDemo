@@ -1,0 +1,79 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #editTeacherModal="ngForm"
+  (ngSubmit)="update()"
+>
+  <abp-modal-header
+    [title]="'EditTeacher' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+
+  <div class="modal-body">
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="name">
+        {{ "Name" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          required
+          maxlength="64"
+          [(ngModel)]="teacher.name"
+          #nameModel="ngModel"
+          #nameEl
+          pattern="^[a-zA-Z\s]+$"
+        />
+        <abp-validation-summary
+          [control]="nameModel"
+          [controlEl]="nameEl"
+        ></abp-validation-summary>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label" for="employeeID">
+        {{ "EmployeeID" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          id="employeeID"
+          name="employeeID"
+          disabled
+          maxlength="20"
+          [(ngModel)]="teacher.employeeID"
+          placeholder="Auto Genereate"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="email">
+        {{ "Email" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          name="email"
+          required
+          [(ngModel)]="teacher.email"
+        />
+      </div>
+    </div>
+
+    <!-- Agar aur fields future me chahiye to yaha likh lena -->
+  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!editTeacherModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+    (onSaveClick)="update()"  
+  ></abp-modal-footer>
+</form>

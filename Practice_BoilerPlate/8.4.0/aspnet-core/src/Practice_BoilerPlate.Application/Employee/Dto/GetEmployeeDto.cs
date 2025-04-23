@@ -9,7 +9,7 @@ namespace Practice_BoilerPlate.Employee.Dto
 {
     public class GetEmployeeDto:Entity<int>
     {
-        public int Id { get; set; }
+       
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -20,5 +20,12 @@ namespace Practice_BoilerPlate.Employee.Dto
         public decimal Salary { get; set; }
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
+        public int AddressId { get; set; }
+        public string AddressAddress1 { get; set; }
+
+        //public string AddressAddress1 { get; set; }
+
+
+
     }
 }

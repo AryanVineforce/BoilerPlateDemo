@@ -10,8 +10,8 @@ namespace Practice_BoilerPlate.Employee.Dto
 {
     public class CreateUpdateEmployeDto:EntityDto<int?>
     {
-        
 
+        public int TenantId { get; set; }
         [Required]
         public string FirstName { get; set; }
 
@@ -36,6 +36,7 @@ namespace Practice_BoilerPlate.Employee.Dto
         [Required]
         public int DepartmentId { get; set; }
         //public string DepartmentName { get; set; }
+        public int AddressId { get; set; }
 
     }
 }

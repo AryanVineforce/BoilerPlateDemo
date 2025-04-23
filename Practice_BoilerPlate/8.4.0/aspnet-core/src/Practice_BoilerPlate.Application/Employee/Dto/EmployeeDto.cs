@@ -19,5 +19,7 @@ namespace Practice_BoilerPlate.Employee.Dto
         public decimal Salary { get; set; }
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
+
+        public int AddressId { get; set; }
     }
 }

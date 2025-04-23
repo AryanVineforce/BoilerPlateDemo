@@ -1,0 +1,144 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createAddressModal="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'CreateNewAddress' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+
+  <div class="modal-body">
+    <!-- Address1 -->
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="address1">
+        {{ "Address1" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          id="address1"
+          name="address1"
+          required
+          maxlength="64"
+          [(ngModel)]="address.address1"
+          #address1Model="ngModel"
+          #address1El
+          pattern="^[a-zA-Z0-9\s,-]+$"
+              placeholder="Enter Address1"
+        />
+        <abp-validation-summary
+          [control]="address1Model"
+          [controlEl]="address1El"
+        ></abp-validation-summary>
+      </div>
+    </div>
+
+    <!-- Address2 -->
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="address2">
+        {{ "Address2" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          id="address2"
+          name="address2"
+          required
+          maxlength="64"
+          [(ngModel)]="address.address2"
+          #address2Model="ngModel"
+          #address2El
+          pattern="^[a-zA-Z0-9\s,-]+$"
+          placeholder="Enter Address2"
+        />
+        <abp-validation-summary
+          [control]="address2Model"
+          [controlEl]="address2El"
+        ></abp-validation-summary>
+      </div>
+    </div>
+
+    <!-- Country -->
+    <!-- Country Dropdown -->
+<div class="form-group row required">
+    <label class="col-md-3 col-form-label">Country</label>
+    <div class="col-md-9">
+      <select
+        class="form-control"
+        [(ngModel)]="address.country"
+        name="country"
+        required
+        (change)="onCountryChange()"
+      >
+      <option value="" disabled selected hidden>Select a Country</option>
+        <option *ngFor="let country of countries" [value]="country.name">
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+   <!-- State Dropdown -->
+<div class="form-group row required">
+    <label class="col-md-3 col-form-label">State</label>
+    <div class="col-md-9">
+      <select
+        class="form-control"
+        [(ngModel)]="address.state"
+        name="state"
+        required
+        (change)="onStateChange()" 
+      >
+      <option value="" disabled selected hidden>Select a State</option>
+
+        <option *ngFor="let state of states" [value]="state.name">{{ state.name }}</option>
+      </select>
+    </div>
+  </div>
+
+    <!-- City -->
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label">City</label>
+      <div class="col-md-9">
+        <select
+          class="form-control"
+          [(ngModel)]="address.city"
+          name="city"
+          required
+        >
+        <option value="" disabled selected hidden>Select a City</option>
+          <option *ngFor="let city of cities" [value]="city">
+            {{ city }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Pincode -->
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label">Pincode</label>
+      <div class="col-md-9">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="address.pinCode"
+          name="pinCode"
+          maxlength="10"
+          pattern="^[a-zA-Z0-9]{4,10}$"
+        placeholder="Enter Pincode"
+        />
+      </div>
+    </div>
+  </div>
+
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createAddressModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+    (onSaveClick)="save()"
+  ></abp-modal-footer>
+</form>

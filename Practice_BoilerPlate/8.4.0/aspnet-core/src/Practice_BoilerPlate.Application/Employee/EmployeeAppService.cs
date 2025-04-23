@@ -5,8 +5,8 @@ using Abp.UI;
 using Microsoft.EntityFrameworkCore;
 using Practice_BoilerPlate.Employee.Dto;
 using Practice_BoilerPlate.Employees;
-using Practice_BoilerPlate.Students;
 using Practice_BoilerPlate.Students.Dto;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,10 +18,9 @@ namespace Practice_BoilerPlate.Employee
         public EmployeeAppService(IRepository<Employeee> repositoryEmployee)
         {
             _employeeRepository = repositoryEmployee;
-
         }
         public async Task CreateAsync(CreateUpdateEmployeDto input)
-        {
+            {
             var employee = new Employeee
             {
                 TenantId = (int)AbpSession.TenantId,
@@ -33,7 +32,8 @@ namespace Practice_BoilerPlate.Employee
                HireDate=input.HireDate,
                Position=input.Position,
                Salary=input.Salary,
-                DepartmentId = input.DepartmentId
+                DepartmentId = input.DepartmentId,
+                AddressId = input.AddressId,
                 };
             await _employeeRepository.InsertAsync(employee);
         }
@@ -43,10 +43,10 @@ namespace Practice_BoilerPlate.Employee
         }
         public async Task<PagedResultDto<GetEmployeeDto>> GetAll(GetAllAccountsInput input)
         {
-            var query = _employeeRepository
-                .GetAllIncluding(e => e.Department) /// ABP ka function hai, jisse employee ke saath uska related Department bhi fetch hota hai (JOIN kar deta hai).
-                .Where(e => e.Department != null);
+            // Get all employees with related Department and Address
+            var query = _employeeRepository.GetAllIncluding(e => e.Department, e => e.Address);
 
+            // If there’s a search keyword, filter employees based on the keyword
             if (!string.IsNullOrWhiteSpace(input.Keyword))
             {
                 query = query.Where(s =>
@@ -56,8 +56,24 @@ namespace Practice_BoilerPlate.Employee
                     s.PhoneNumber.Contains(input.Keyword));
             }
 
-            var employees = await query.ToListAsync();
+            // Get total count of employees after filtering (for pagination)
+            var totalCount = await query.CountAsync();
 
+            // Fetch the list of employees based on pagination parameters
+            var employees = await query
+                .OrderBy(e => e.FirstName) // Sort by first name
+                .Skip(input.SkipCount)     // Skip records based on pagination
+                .Take(input.MaxResultCount) // Take the desired number of records
+                .ToListAsync();
+
+            // Debug: Log the employee data (you can also log this to a file or use a logging framework)
+            foreach (var employee in employees)
+            {
+                // Check if Address is null for any employee
+                Console.WriteLine($"Employee ID: {employee.Id}, Address: {employee.Address?.Address1 ?? "No Address"}");
+            }
+
+            // Map the employees to DTOs (Data Transfer Objects)
             var result = employees.Select(employee => new GetEmployeeDto
             {
                 Id = employee.Id,
@@ -70,28 +86,25 @@ namespace Practice_BoilerPlate.Employee
                 Position = employee.Position,
                 Salary = employee.Salary,
                 DepartmentId = employee.DepartmentId,
-                DepartmentName = employee.Department?.Name
+                DepartmentName = employee.Department?.Name ?? "No Department", // Handle null Department
+                AddressId = employee.AddressId,
+                AddressAddress1 = employee.Address?.Address1 ?? "No Address" // Handle null Address
             }).ToList();
 
-            return new PagedResultDto<GetEmployeeDto>(
-                result.Count,
-                result
-            );
+            // Return the paged result
+            return new PagedResultDto<GetEmployeeDto>(totalCount, result);
         }
+
+
 
         public async Task UpdateAsync(UpdateEmployeeDto input)
         {
-            var employees = await _employeeRepository
-      .GetAllIncluding(e => e.Department)
-      .Where(e => e.Department != null)
-      .ToListAsync();
             var employee = await _employeeRepository.FirstOrDefaultAsync(input.Id);
             if (employee == null)
             {
                 throw new UserFriendlyException("Employee not found");
             }
 
-            
             employee.FirstName = input.FirstName;
             employee.LastName = input.LastName;
             employee.Email = input.Email;
@@ -101,10 +114,10 @@ namespace Practice_BoilerPlate.Employee
             employee.Position = input.Position;
             employee.Salary = input.Salary;
             employee.DepartmentId = input.DepartmentId;
-            employee.Department.Name = employee.Department.Name;
+            employee.AddressId = input.AddressId;
+
             await _employeeRepository.UpdateAsync(employee);
         }
 
-       
     }
 }
