@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Practice_BoilerPlate.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Practice_BoilerPlate.EntityFrameworkCore;
 namespace Practice_BoilerPlate.Migrations
 {
     [DbContext(typeof(Practice_BoilerPlateDbContext))]
-    partial class Practice_BoilerPlateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250424041131_addteachersubjectsmodel")]
+    partial class addteachersubjectsmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1822,56 +1825,6 @@ namespace Practice_BoilerPlate.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("Practice_BoilerPlate.Enrollments.Enrollment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EnrollmentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Enrollments");
-                });
-
             modelBuilder.Entity("Practice_BoilerPlate.MultiTenancy.Tenant", b =>
                 {
                     b.Property<int>("Id")
@@ -2085,7 +2038,10 @@ namespace Practice_BoilerPlate.Migrations
                     b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeacherId")
+                    b.Property<int>("TeaacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TeacherId")
                         .HasColumnType("int");
 
                     b.Property<int>("TenantId")
@@ -2386,25 +2342,6 @@ namespace Practice_BoilerPlate.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("Practice_BoilerPlate.Enrollments.Enrollment", b =>
-                {
-                    b.HasOne("Practice_BoilerPlate.Courses.Course", "Course")
-                        .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Practice_BoilerPlate.Students.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("Practice_BoilerPlate.MultiTenancy.Tenant", b =>
                 {
                     b.HasOne("Practice_BoilerPlate.Authorization.Users.User", "CreatorUser")
@@ -2453,9 +2390,7 @@ namespace Practice_BoilerPlate.Migrations
 
                     b.HasOne("Practice_BoilerPlate.Teachers.Teacher", "Teacher")
                         .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TeacherId");
 
                     b.Navigation("Subject");
 

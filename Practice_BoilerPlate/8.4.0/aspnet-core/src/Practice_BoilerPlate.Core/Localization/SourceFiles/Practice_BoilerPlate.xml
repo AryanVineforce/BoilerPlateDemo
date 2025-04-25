@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
   <texts>
+	  <text name="CreateNewEnrollment" value="Create New Enrollment" />
+	  <text name="CreateTeacherSubject" value="Create Teacher Subject" />
 	 <text name="CreateNewStudent" value="Create New Student" />
 	 <text name="CreateNewEmployee" value="Create New Employee" />
 	 <text name="CreateNewDepartment" value="Create New Department" />

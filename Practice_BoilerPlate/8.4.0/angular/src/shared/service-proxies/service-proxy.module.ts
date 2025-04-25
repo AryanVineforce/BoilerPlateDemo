@@ -7,6 +7,9 @@ import * as ApiServiceProxies from './service-proxies';
 @NgModule({
     providers: [
         ApiServiceProxies.StudentServiceProxy ,
+        ApiServiceProxies.SubejctServiceProxy ,
+        ApiServiceProxies.TeacherSubjectServiceProxy ,
+        ApiServiceProxies.EnrollmentServiceProxy ,
         ApiServiceProxies.TeacherServiceProxy,
         ApiServiceProxies.AddressServiceProxy,
         ApiServiceProxies. EmployeeServiceProxy,

@@ -10,6 +10,8 @@ using Practice_BoilerPlate.Courses;
 using Practice_BoilerPlate.Teachers;
 using Practice_BoilerPlate.Addresses;
 using Practice_BoilerPlate.Subjects;
+using Practice_BoilerPlate.TeacherSubjects;
+using Practice_BoilerPlate.Enrollments;
 
 namespace Practice_BoilerPlate.EntityFrameworkCore
 {
@@ -28,6 +30,8 @@ namespace Practice_BoilerPlate.EntityFrameworkCore
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet <Address>Addresses { get; set; }
         public DbSet <Subject>Subjects { get; set; }
+        public DbSet<TeacherSubject> TeacherSubjects { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
 
     }
 }

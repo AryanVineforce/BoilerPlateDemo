@@ -1,0 +1,60 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #editenrollmentModal="ngForm"
+  (ngSubmit)="update()"
+>
+  <abp-modal-header
+    [title]="'EditEnrollment' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+
+  <div class="modal-body">
+    <!-- Teacher Dropdown -->
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="CourseId">
+        {{ "Course" | localize }}
+      </label>
+      <div class="col-md-9">
+        <select
+          class="form-control"
+          id="courseId"
+          name="courseId"
+          required
+          [(ngModel)]="enrollment.courseId"
+        >
+          <option *ngFor="let course of courses" [value]="course.id">
+            {{ course.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Subject Dropdown -->
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="StudentId">
+        {{ "Student" | localize }}
+      </label>
+      <div class="col-md-9">
+        <select
+          class="form-control"
+          id="studentId"
+          name="studentId"
+          required
+          [(ngModel)]="enrollment.studentId"
+        >
+          <option *ngFor="let student of students" [value]="student.id">
+            {{ student.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!editenrollmentModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+    (onSaveClick)="update()"  
+  ></abp-modal-footer>
+</form>

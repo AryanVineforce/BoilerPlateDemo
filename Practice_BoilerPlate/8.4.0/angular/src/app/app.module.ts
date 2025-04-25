@@ -58,6 +58,15 @@ import { EditTeacherDialogComponent } from './teacher/edit-teacher/edit-teacher-
 import { AddressComponent } from './address.component';
 import { EditAddressDialogComponent } from './address/edit-address/edit-address-dialog.component';
 import { CreateAddressDialogComponent } from './address/create-address/create-address-dialog.component';
+import { TeachersubjectComponent } from './teachersubject/teachersubject.component';
+import { SubjectComponent } from './subject/subject.component';
+import { EditSubjectDialogComponent } from './subject/edit-subject/edit-subject-dialog.component';
+import { CreateSubjectDialogComponent } from './subject/create-subject/create-subject-dialog.component';
+import { EditTeacherSubjectDialogComponent } from './teachersubject/edit-subject/edit-teachersubject-dialog.component';
+import { CreateTeachersubjectDialogComponent } from './teachersubject/create-subject/create-teachersubject-dialog.component';
+import { EnrollmentComponent } from './enrollment/enrollment.component';
+import { CreateEnrollmentDialogComponent } from './enrollment/create-enrollment/create-enrollment-dialog.component';
+import { EditEnrollmentDialogComponent } from './enrollment/edit-enrollment/edit-enrollment-dialog.component';
 
 
 @NgModule({
@@ -107,6 +116,15 @@ import { CreateAddressDialogComponent } from './address/create-address/create-ad
         AddressComponent,
         EditAddressDialogComponent,
         CreateAddressDialogComponent,
+        TeachersubjectComponent,
+        SubjectComponent,
+        EditSubjectDialogComponent,
+        CreateSubjectDialogComponent,
+        EditTeacherSubjectDialogComponent,
+        CreateTeachersubjectDialogComponent,
+        EnrollmentComponent,
+        CreateEnrollmentDialogComponent,
+        EditEnrollmentDialogComponent,
     
       
       

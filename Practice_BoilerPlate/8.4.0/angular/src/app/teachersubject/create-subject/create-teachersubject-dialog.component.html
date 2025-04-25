@@ -1,0 +1,60 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createTeacherSubjectModal="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'CreateTeacherSubject' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+
+  <div class="modal-body">
+    <!-- Teacher Dropdown -->
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="teacherId">
+        {{ "Teacher" | localize }}
+      </label>
+      <div class="col-md-9">
+        <select
+          class="form-control"
+          id="teacherId"
+          name="teacherId"
+          required
+          [(ngModel)]="teacherSubject.teacherId"
+        >
+          <option *ngFor="let teacher of teachers" [value]="teacher.id">
+            {{ teacher.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Subject Dropdown -->
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="subjectId">
+        {{ "Subject" | localize }}
+      </label>
+      <div class="col-md-9">
+        <select
+          class="form-control"
+          id="subjectId"
+          name="subjectId"
+          required
+          [(ngModel)]="teacherSubject.subjectId"
+        >
+          <option *ngFor="let subject of subjects" [value]="subject.id">
+            {{ subject.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createTeacherSubjectModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+    (onSaveClick)="save()"
+  ></abp-modal-footer>
+</form>
