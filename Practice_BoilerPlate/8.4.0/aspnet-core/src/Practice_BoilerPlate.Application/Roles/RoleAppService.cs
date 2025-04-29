@@ -51,12 +51,12 @@ namespace Practice_BoilerPlate.Roles
 
         public async Task<ListResultDto<RoleListDto>> GetRolesAsync(GetRolesInput input)
         {
-            var roles = await _roleManager
-                .Roles
-                .WhereIf(
-                    !input.Permission.IsNullOrWhiteSpace(),
-                    r => r.Permissions.Any(rp => rp.Name == input.Permission && rp.IsGranted)
-                )
+                var roles = await _roleManager
+                    .Roles
+                    .WhereIf(
+                        !input.Permission.IsNullOrWhiteSpace(),
+                        r => r.Permissions.Any(rp => rp.Name == input.Permission && rp.IsGranted)
+                    )
                 .ToListAsync();
 
             return new ListResultDto<RoleListDto>(ObjectMapper.Map<List<RoleListDto>>(roles));

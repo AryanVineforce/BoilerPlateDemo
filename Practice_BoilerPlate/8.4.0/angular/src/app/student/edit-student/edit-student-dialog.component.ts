@@ -27,7 +27,7 @@ export class EditStudentDialogComponent
   @Output() onUpdate = new EventEmitter<any>();
   selectedDate: string;
   sphone:string;
-  selectedGender: import("c:/Users/Aryan Jain/source/repos/Practice_BoilerPlate/8.4.0/angular/src/shared/service-proxies/service-proxies").Gender;
+  selectedGender: import("c:/Users/Vineforce/source/repo/BoilerPlateDemo//Practice_BoilerPlate/8.4.0/angular/src/shared/service-proxies/service-proxies").Gender;
   constructor(
     injector: Injector,
     private _studentService: StudentServiceProxy,
