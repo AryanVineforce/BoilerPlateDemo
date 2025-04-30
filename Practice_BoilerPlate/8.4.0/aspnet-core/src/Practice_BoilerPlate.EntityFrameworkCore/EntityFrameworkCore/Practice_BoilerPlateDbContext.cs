@@ -12,6 +12,7 @@ using Practice_BoilerPlate.Addresses;
 using Practice_BoilerPlate.Subjects;
 using Practice_BoilerPlate.TeacherSubjects;
 using Practice_BoilerPlate.Enrollments;
+using Practice_BoilerPlate.FileUploads;
 
 namespace Practice_BoilerPlate.EntityFrameworkCore
 {
@@ -32,6 +33,7 @@ namespace Practice_BoilerPlate.EntityFrameworkCore
         public DbSet <Subject>Subjects { get; set; }
         public DbSet<TeacherSubject> TeacherSubjects { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<FileUpload> FileUploads { get; set; }
 
     }
 }

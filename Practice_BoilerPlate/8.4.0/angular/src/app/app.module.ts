@@ -67,6 +67,9 @@ import { CreateTeachersubjectDialogComponent } from './teachersubject/create-sub
 import { EnrollmentComponent } from './enrollment/enrollment.component';
 import { CreateEnrollmentDialogComponent } from './enrollment/create-enrollment/create-enrollment-dialog.component';
 import { EditEnrollmentDialogComponent } from './enrollment/edit-enrollment/edit-enrollment-dialog.component';
+import { FileuploadComponent } from './fileupload/fileupload.component';
+import { CreateFileuploadDialogComponent } from './fileupload/create-fileupload/create-fileupload-dialog.component';
+import { EditFileuploadDialogComponent } from './fileupload/edit-fileupload/edit-fileupload-dialog.component';
 
 
 @NgModule({
@@ -125,6 +128,9 @@ import { EditEnrollmentDialogComponent } from './enrollment/edit-enrollment/edit
         EnrollmentComponent,
         CreateEnrollmentDialogComponent,
         EditEnrollmentDialogComponent,
+        FileuploadComponent,
+        CreateFileuploadDialogComponent,
+        EditFileuploadDialogComponent,
     
       
       

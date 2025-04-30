@@ -17,6 +17,7 @@ import { AddressComponent } from "./address.component";
 import { TeachersubjectComponent } from "./teachersubject/teachersubject.component";
 import { SubjectComponent } from "./subject/subject.component";
 import { EnrollmentComponent } from "./enrollment/enrollment.component";
+import { FileuploadComponent } from "./fileupload/fileupload.component";
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { EnrollmentComponent } from "./enrollment/enrollment.component";
           { path: "teachersubject", component: TeachersubjectComponent },
           { path: "subject", component: SubjectComponent },
           { path: "enrollment", component: EnrollmentComponent },
+          { path: "fileupload", component: FileuploadComponent },
         ],
       },
     ]),

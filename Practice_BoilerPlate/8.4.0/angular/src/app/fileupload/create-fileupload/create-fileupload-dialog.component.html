@@ -1,0 +1,41 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createfileuploadModal="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'CreateNewDepartment' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+ 
+  <div class="modal-body">
+    <div class="form-group row required">
+      <label class="col-md-3 col-form-label" for="file">
+        {{ "ChooseFile" | localize }}
+      </label>
+      <div class="col-md-9">
+        <input
+          type="file"
+          class="form-control"
+          id="file"
+          name="file"
+          required
+          (change)="onFileChange($event)"
+  
+        />      </div>
+    </div>
+  </div>
+ 
+    <!-- Agar aur fields future me chahiye to yaha likh lena -->
+ 
+ 
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createfileuploadModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+    (onSaveClick)="save()"  
+  ></abp-modal-footer>
+</form>
+ 
+ 
