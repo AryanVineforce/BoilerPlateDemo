@@ -23,7 +23,6 @@ export class EditStudentDialogComponent
 {
   saving = false;
   student = new UpdateStudentDto();
-
   @Output() onUpdate = new EventEmitter<any>();
   selectedDate: string;
   sphone:string;
@@ -35,10 +34,8 @@ export class EditStudentDialogComponent
   ) {
     super(injector);
   }
-
   ngOnInit(): void {
    debugger
-   
       // this.selectedDate = (this.student.dob ).toDate(); 
       if (this.student.dob) {
         // Convert moment → JS Date
@@ -47,20 +44,7 @@ export class EditStudentDialogComponent
       this.selectedGender = this.student.gender; // Moment → Date
       this.sphone=this.student.phoneNumber;
       }
-
   update(): void {
-    if (this.student.age < 18 || this.student .age > 100) {
-      alert("Age must be greater than 18 and less than 100.");
-      return ;
-    }
-    if (!/^[a-zA-Z0-9]+$/.test(this.student .rollNumber)) {
-      alert("Roll number should only contain alphabets and numbers, no special characters or symbols allowed.");
-      return ;
-    }
-    if (!/^[a-zA-Z]+$/.test(this.student .name)) {
-      alert("Name should only contain alphabets  , no numbers special characters or symbols allowed.");
-      return ;
-    }
     this.student.gender = this.selectedGender;
     this.student.dob = moment(this.selectedDate); // from string to moment
 
