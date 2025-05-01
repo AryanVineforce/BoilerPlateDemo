@@ -5133,7 +5133,7 @@ export interface IDepartmentCreateUpdateDto {
 export class EnrollmentCreateUpdateDto implements IEnrollmentCreateUpdateDto {
     id: number;
     studentId: number;
-    courseId: number;
+    courseIds: number[] | undefined;
     enrollmentDate: moment.Moment;
 
     constructor(data?: IEnrollmentCreateUpdateDto) {
@@ -5149,7 +5149,11 @@ export class EnrollmentCreateUpdateDto implements IEnrollmentCreateUpdateDto {
         if (_data) {
             this.id = _data["id"];
             this.studentId = _data["studentId"];
-            this.courseId = _data["courseId"];
+            if (Array.isArray(_data["courseIds"])) {
+                this.courseIds = [] as any;
+                for (let item of _data["courseIds"])
+                    this.courseIds.push(item);
+            }
             this.enrollmentDate = _data["enrollmentDate"] ? moment(_data["enrollmentDate"].toString()) : <any>undefined;
         }
     }
@@ -5165,7 +5169,11 @@ export class EnrollmentCreateUpdateDto implements IEnrollmentCreateUpdateDto {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["studentId"] = this.studentId;
-        data["courseId"] = this.courseId;
+        if (Array.isArray(this.courseIds)) {
+            data["courseIds"] = [];
+            for (let item of this.courseIds)
+                data["courseIds"].push(item);
+        }
         data["enrollmentDate"] = this.enrollmentDate ? this.enrollmentDate.toISOString() : <any>undefined;
         return data;
     }
@@ -5181,7 +5189,7 @@ export class EnrollmentCreateUpdateDto implements IEnrollmentCreateUpdateDto {
 export interface IEnrollmentCreateUpdateDto {
     id: number;
     studentId: number;
-    courseId: number;
+    courseIds: number[] | undefined;
     enrollmentDate: moment.Moment;
 }
 
