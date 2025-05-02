@@ -1,11 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
   <texts>
+	  <text name="CreateNewCourse" value="Create New Course" />
+	  <text name="EditCourse" value="Edit Course" />
+	  <text name="CreateNewSubject" value="Create New Subject" />
+	  <text name="EditSubject" value="Edit Subject" />
 	  <text name="CreateNewEnrollment" value="Create New Enrollment" />
 	  <text name="CreateTeacherSubject" value="Create Teacher Subject" />
+	  <!--<text name="EditSubject" value="Edit Subject" />-->
 	 <text name="CreateNewStudent" value="Create New Student" />
 	 <text name="CreateNewEmployee" value="Create New Employee" />
 	 <text name="CreateNewDepartment" value="Create New Department" />
+	 <text name="EditDepartment" value="Edit Department" />
+	 <text name="CreateNewTeacher" value="Create New Teacher" />
+	 <text name="EditTeacher" value="Edit Teacher" />
+	 <text name="UploadFile" value="Upload File" />
+	 <text name="EditFile" value="Edit File" />
     <text name="HomePage" value="Home page" />
     <text name="About" value="About" />
     <text name="WelcomeMessage" value="Welcome to Practice_BoilerPlate!" />
