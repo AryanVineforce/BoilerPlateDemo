@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+// import { MultiSelectModule } from 'primeng/multiselect';
+import {MultiSelectModule} from 'primeng/multiselect';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientJsonpModule } from '@angular/common/http';
@@ -14,6 +16,7 @@ import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module
 import { SharedModule } from '@shared/shared.module';
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
+
 // tenants
 import { TenantsComponent } from '@app/tenants/tenants.component';
 import { CreateTenantDialogComponent } from './tenants/create-tenant/create-tenant-dialog.component';
@@ -140,6 +143,7 @@ import { EditFileuploadDialogComponent } from './fileupload/edit-fileupload/edit
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        MultiSelectModule,
         HttpClientModule,
         HttpClientJsonpModule,
         ModalModule.forChild(),

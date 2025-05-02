@@ -2,6 +2,7 @@
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Practice_BoilerPlate.Courses;
 using Practice_BoilerPlate.Students.Dto;
 using Practice_BoilerPlate.TeacherSubjects.Dto;
 using System;
@@ -25,20 +26,23 @@ namespace Practice_BoilerPlate.Enrollments.Dto
         {
             try
             {
-                var enroll = new Enrollment
+                foreach (var courseId in input.CourseIds)
                 {
-                    TenantId = (int)AbpSession.TenantId,
-                    StudentId = input.StudentId,
-                    CourseId = input.CourseId,
-                    EnrollmentDate = input.EnrollmentDate,
-                };
+                    var enroll = new Enrollment
+                    {
+                        TenantId = (int)AbpSession.TenantId,
+                        StudentId = input.StudentId,
+                        CourseId = courseId,
+                    
+                    };
 
-                await _enrollmentsRepository.InsertAsync(enroll);
+                    await _enrollmentsRepository.InsertAsync(enroll);
+                }
             }
             catch (Exception ex)
             {
-                Logger.Error("Error while creating enrollment", ex);
-                throw; // rethrow to keep ABP error format
+                Logger.Error("Error while creating enrollments", ex);
+                throw;
             }
         }
 
@@ -82,12 +86,37 @@ namespace Practice_BoilerPlate.Enrollments.Dto
 
         public async Task UpdateAsync(EnrollmentCreateUpdateDto input)
         {
-            var Enrolll = await _enrollmentsRepository.GetAsync(input.Id);
+            try
+            {
+                // Step 1: Delete existing enrollments for this student
+                var existingEnrollments = await _enrollmentsRepository
+                    .GetAll()
+                    .Where(e => e.StudentId == input.StudentId)
+                    .ToListAsync();
 
-            Enrolll.StudentId = input.StudentId;
-            Enrolll.CourseId = input.CourseId;
+                foreach (var enrollment in existingEnrollments)
+                {
+                    await _enrollmentsRepository.DeleteAsync(enrollment);
+                }
 
-            await _enrollmentsRepository.UpdateAsync(Enrolll);
+                // Step 2: Insert updated course enrollments
+                foreach (var courseId in input.CourseIds)
+                {
+                    var newEnrollment = new Enrollment
+                    {
+                        TenantId = (int)AbpSession.TenantId,
+                        StudentId = input.StudentId,
+                        CourseId = courseId
+                    };
+
+                    await _enrollmentsRepository.InsertAsync(newEnrollment);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Error while updating enrollments", ex);
+                throw;
+            }
         }
     }
 }

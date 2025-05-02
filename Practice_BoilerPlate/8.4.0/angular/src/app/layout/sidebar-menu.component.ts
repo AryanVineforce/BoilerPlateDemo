@@ -70,30 +70,14 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
             new MenuItem(this.l('Course'), '/app/course', 'fas fa-id-badge'),
             new MenuItem(this.l('Enrollment'), '/app/enrollment', 'fas fa-id-badge'),
             new MenuItem(this.l('TeacherSubject'), '/app/teachersubject', 'fas fa-id-badge'),
-            new MenuItem(this.l('subject'), '/app/subject', 'fas fa-id-badge'),
+            new MenuItem(this.l('Subject'), '/app/subject', 'fas fa-id-badge'),
             new MenuItem(this.l('File Uplaod'), '/app/fileupload', 'fas fa-id-badge'),
-            new MenuItem(this.l('MultiLevelMenu'), '', 'fas fa-circle', '', [
-                new MenuItem('ASP.NET Boilerplate', '', 'fas fa-dot-circle', '', [
-                    new MenuItem(
-                        'Home',
-                        'https://aspnetboilerplate.com?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Templates',
-                        'https://aspnetboilerplate.com/Templates?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Samples',
-                        'https://aspnetboilerplate.com/Samples?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Documents',
-                        'https://aspnetboilerplate.com/Pages/Documents?ref=abptmpl',
-                        'far fa-circle'
-                    ),
+            new MenuItem(this.l('Academics'), '', 'fas fa-circle', '', [
+                new MenuItem('Student', '', 'fas fa-dot-circle', '', [
+                    new MenuItem(this.l('Course'), '/app/course', 'fas fa-id-badge'),
+                    new MenuItem(this.l('Subject'), '/app/subject', 'fas fa-id-badge'),
+                    new MenuItem(this.l('Enrollment'), '/app/enrollment', 'fas fa-id-badge'),
+                    new MenuItem(this.l('TeacherSubject'), '/app/teachersubject', 'fas fa-id-badge')
                 ]),
                 new MenuItem('ASP.NET Zero', '', 'fas fa-dot-circle', '', [
                     new MenuItem(

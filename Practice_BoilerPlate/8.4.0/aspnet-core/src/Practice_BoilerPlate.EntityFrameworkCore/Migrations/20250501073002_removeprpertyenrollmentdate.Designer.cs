@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Practice_BoilerPlate.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Practice_BoilerPlate.EntityFrameworkCore;
 namespace Practice_BoilerPlate.Migrations
 {
     [DbContext(typeof(Practice_BoilerPlateDbContext))]
-    partial class Practice_BoilerPlateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250501073002_removeprpertyenrollmentdate")]
+    partial class removeprpertyenrollmentdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
