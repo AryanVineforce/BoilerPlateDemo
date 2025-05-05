@@ -79,35 +79,16 @@ export class SidebarMenuComponent extends AppComponentBase implements OnInit {
                     new MenuItem(this.l('Enrollment'), '/app/enrollment', 'fas fa-id-badge'),
                     new MenuItem(this.l('TeacherSubject'), '/app/teachersubject', 'fas fa-id-badge')
                 ]),
-                new MenuItem('ASP.NET Zero', '', 'fas fa-dot-circle', '', [
-                    new MenuItem(
-                        'Home',
-                        'https://aspnetzero.com?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Features',
-                        'https://aspnetzero.com/Features?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Pricing',
-                        'https://aspnetzero.com/Pricing?ref=abptmpl#pricing',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Faq',
-                        'https://aspnetzero.com/Faq?ref=abptmpl',
-                        'far fa-circle'
-                    ),
-                    new MenuItem(
-                        'Documents',
-                        'https://aspnetzero.com/Documents?ref=abptmpl',
-                        'far fa-circle'
-                    )
+                new MenuItem(this.l('Staff'), '', 'fas fa-users', '', [
+                
+                    new MenuItem(this.l('Departments'), '/app/department', 'fas fa-building'),
+                    new MenuItem(this.l('Teachers'), '/app/teacher', 'fas fa-chalkboard-teacher'),
+                    new MenuItem(this.l('Employee'), '/app/employee', 'fas fa-user-tie'),
+                ,
+               
                 ])
-            ])
-        ];
+            ]
+        ;
     }
 
     patchMenuItems(items: MenuItem[], parentId?: number): void {
