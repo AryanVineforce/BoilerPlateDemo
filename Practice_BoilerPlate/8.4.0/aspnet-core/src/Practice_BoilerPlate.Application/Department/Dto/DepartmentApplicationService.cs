@@ -7,6 +7,8 @@ using Practice_BoilerPlate.Departments;
 using Practice_BoilerPlate.Students.Dto;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
+
 
 namespace Practice_BoilerPlate.Department
 {
@@ -44,6 +46,7 @@ namespace Practice_BoilerPlate.Department
         {
             var query = _departmentrepository.GetAll();
 
+            // Filtering
             if (!string.IsNullOrWhiteSpace(input.Keyword))
             {
                 query = query.Where(d =>
@@ -52,9 +55,19 @@ namespace Practice_BoilerPlate.Department
                     d.Description.Contains(input.Keyword));
             }
 
-            var departments = await query.ToListAsync();
+            // Sorting - default to Name if no Sorting is specified
+            query = !string.IsNullOrWhiteSpace(input.Sorting)
+                ? query.OrderBy(input.Sorting)
+                : query.OrderBy(d => d.Name);
 
-            var result = departments.Select(department => new GetDepartmentDto
+            // Paging
+            var pagedDepartments = await query
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount)
+                .ToListAsync();
+
+            // Mapping
+            var result = pagedDepartments.Select(department => new GetDepartmentDto
             {
                 Id = department.Id,
                 Name = department.Name,
@@ -62,7 +75,7 @@ namespace Practice_BoilerPlate.Department
                 Description = department.Description
             }).ToList();
 
-            var totalCount = result.Count;
+            var totalCount = await query.CountAsync();
 
             return new PagedResultDto<GetDepartmentDto>(totalCount, result);
         }

@@ -70,6 +70,15 @@ import { EditEnrollmentDialogComponent } from './enrollment/edit-enrollment/edit
 import { FileuploadComponent } from './fileupload/fileupload.component';
 import { CreateFileuploadDialogComponent } from './fileupload/create-fileupload/create-fileupload-dialog.component';
 import { EditFileuploadDialogComponent } from './fileupload/edit-fileupload/edit-fileupload-dialog.component';
+import { BedComponent } from './bed/bed.component';
+import { CreateBedDialogComponent } from './bed/create-bed/create-bed-dialog.component';
+import { EditBedDialogComponent } from './bed/edit-bed/edit-bed-dialog.component';
+import { PatientComponent } from './patient/patient.component';
+import { EditPatientDialogComponent } from './patient/edit-patient/edit-patient-dialog.component';
+import { CreatePatientDialogComponent } from './patient/create-patient/create-patient-dialog.component';
+import { AdmissionComponent } from './admission/admission.component';
+import { CreateAdmissionDialogComponent } from './admission/create-admission/create-admission-dialog.component';
+import { EditAdmissionDialogComponent } from './admission/edit-admission/edit-admission-dialog.component';
 
 
 @NgModule({
@@ -131,6 +140,15 @@ import { EditFileuploadDialogComponent } from './fileupload/edit-fileupload/edit
         FileuploadComponent,
         CreateFileuploadDialogComponent,
         EditFileuploadDialogComponent,
+        BedComponent,
+        CreateBedDialogComponent,
+        EditBedDialogComponent,
+        PatientComponent,
+        EditPatientDialogComponent,
+        CreatePatientDialogComponent,
+        AdmissionComponent,
+        CreateAdmissionDialogComponent,
+        EditAdmissionDialogComponent,
     
       
       
