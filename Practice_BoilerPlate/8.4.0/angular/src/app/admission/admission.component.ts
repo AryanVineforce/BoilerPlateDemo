@@ -31,6 +31,7 @@ export class AdmissionComponent extends PagedListingComponentBase<GetSubjectDto>
  adds: GetAdmissionDto[] = [];
   isActive: boolean | null; 
   keyword = "";
+  sorting = "name asc";
   advancedFiltersVisible = false;
 
   constructor(
@@ -67,7 +68,11 @@ export class AdmissionComponent extends PagedListingComponentBase<GetSubjectDto>
            this.refresh();
          });
       }
-      
+      changeSorting(field: string): void {
+        const isAsc = this.sorting === `${field} asc`;
+        this.sorting = isAsc ? `${field} desc` : `${field} asc`;
+        this.refresh();
+      }
   
   
     clearFilters(): void {
@@ -85,7 +90,7 @@ export class AdmissionComponent extends PagedListingComponentBase<GetSubjectDto>
       this._addservice//api call
         .getAll(
           request.keyword,
-          undefined,
+      this.sorting,
           request.skipCount,
           request.maxResultCount
         )

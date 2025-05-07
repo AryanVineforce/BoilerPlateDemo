@@ -8,6 +8,7 @@ using Practice_BoilerPlate.Students.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,28 +48,26 @@ namespace Practice_BoilerPlate.Admissions
         {
             var query = _addrepo.GetAllIncluding(e => e.Patient, e => e.Bed);
 
-            // If there’s a search keyword, filter employees based on the keyword
             if (!string.IsNullOrWhiteSpace(input.Keyword))
             {
                 query = query.Where(s =>
-                   s.Notes.Contains(input.Keyword) ||
-            s.Patient.Name.Contains(input.Keyword) ||
-            s.Bed.BedNumber.Contains(input.Keyword)
-
-            );
+                    s.Notes.Contains(input.Keyword) ||
+                    s.Patient.Name.Contains(input.Keyword) ||
+                    s.Bed.BedNumber.Contains(input.Keyword)
+                );
             }
 
-            // Get total count of employees after filtering (for pagination)
+            //query = !string.IsNullOrWhiteSpace(input.Sorting)
+            //    ? query.OrderBy(input.Sorting)
+            //    : query.OrderBy(d => d.BedId);
+
             var totalCount = await query.CountAsync();
 
-            // Fetch the list of employees based on pagination parameters
             var admissions = await query
-                .OrderBy(e => e.Notes) // Sort by first name
-                .Skip(input.SkipCount)     // Skip records based on pagination
-                .Take(input.MaxResultCount) // Take the desired number of records
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount)
                 .ToListAsync();
 
-            // Map to DTOs
             var items = admissions.Select(admission => new GetAdmissionDto
             {
                 Id = admission.Id,
@@ -81,7 +80,6 @@ namespace Practice_BoilerPlate.Admissions
                 Notes = admission.Notes
             }).ToList();
 
-            // Return paged result
             return new PagedResultDto<GetAdmissionDto>(totalCount, items);
         }
 
