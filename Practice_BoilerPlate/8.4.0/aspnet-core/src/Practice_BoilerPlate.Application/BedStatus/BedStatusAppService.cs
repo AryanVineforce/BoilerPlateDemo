@@ -2,8 +2,8 @@
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using BoilerPlate_New.Beds;
+using Microsoft.EntityFrameworkCore;
 using Practice_BoilerPlate.BedStatus.DTo;
-using Practice_BoilerPlate.Enrollments.Dto;
 using Practice_BoilerPlate.Students.Dto;
 using System;
 using System.Collections.Generic;
@@ -13,37 +13,31 @@ using System.Threading.Tasks;
 
 namespace Practice_BoilerPlate.BedStatus
 {
-    public class BedStatusAppService:ApplicationService,IBedStatusAppSerive
+    public class BedStatusAppService : ApplicationService, IBedStatusAppSerive
     {
         private readonly IRepository<Bed> _bedsRepo;
-        public BedStatusAppService(IRepository<Bed> _bedsRepo)
+        public BedStatusAppService(IRepository<Bed> bedsRepo)
         {
-            
+            _bedsRepo = bedsRepo;
         }
-
-        public Task CreateAsync(EnrollmentCreateUpdateDto input)
+        public async Task<List<BedStatusPieChartDto>> GetAll(GetAllAccountsInput input)
         {
-            throw new NotImplementedException();
-        }
+            if (input.IsForChart)
+            {
+                var data = await _bedsRepo.GetAll()
+                    .GroupBy(b => b.Status)
+                    .Select(g => new BedStatusPieChartDto
+                    {
+                        Status = g.Key.ToString(),
+                        Count = g.Count()
+                    })
+                    .ToListAsync();
 
-        public Task DeleteAsync(EntityDto<int> input)
-        {
-            throw new NotImplementedException();
-        }
+                return data;
+            }
 
-        public Task<PagedResultDto<BedStatusPieChartDto>> GetAll(GetAllAccountsInput getAllAccountInput)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(EnrollmentCreateUpdateDto input)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<PagedResultDto<EnrollmentGetDto>> IEnrollmentsApplicationService.GetAll(GetAllAccountsInput getAllAccountInput)
-        {
-            throw new NotImplementedException();
+            // Otherwise, handle regular paged list request (for bed table)
+            throw new NotImplementedException("Regular list not implemented here.");
         }
     }
 }
