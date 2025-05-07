@@ -82,7 +82,7 @@ import { CreatePatientDialogComponent } from './patient/create-patient/create-pa
 import { AdmissionComponent } from './admission/admission.component';
 import { CreateAdmissionDialogComponent } from './admission/create-admission/create-admission-dialog.component';
 import { EditAdmissionDialogComponent } from './admission/edit-admission/edit-admission-dialog.component';
-
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
     declarations: [
@@ -172,6 +172,8 @@ import { EditAdmissionDialogComponent } from './admission/edit-admission/edit-ad
         ServiceProxyModule,
         SharedModule,
         NgxPaginationModule,
+        NgChartsModule,
+        
     ],
     providers: [
         DepartmentServiceProxy,

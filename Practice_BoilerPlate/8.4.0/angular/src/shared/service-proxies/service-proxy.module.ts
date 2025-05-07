@@ -10,6 +10,7 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.BedServiceProxy ,
 
         ApiServiceProxies.SubejctServiceProxy ,
+        ApiServiceProxies.BedStatusServiceProxy ,
         ApiServiceProxies.AdmissionsServiceProxy ,
         ApiServiceProxies.PatientServiceProxy ,
         ApiServiceProxies.TeacherSubjectServiceProxy ,

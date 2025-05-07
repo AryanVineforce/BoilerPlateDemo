@@ -1,4 +1,5 @@
-﻿using Abp.Application.Services.Dto;
+﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using Practice_BoilerPlate.BedStatus.DTo;
 using Practice_BoilerPlate.Enrollments.Dto;
 using Practice_BoilerPlate.Students.Dto;
@@ -10,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace Practice_BoilerPlate.BedStatus
 {
-    public interface IBedStatusAppSerive:IEnrollmentsApplicationService
+    public interface IBedStatusAppSerive:IApplicationService
     {
-        Task<PagedResultDto<BedStatusPieChartDto>> GetAll(GetAllAccountsInput getAllAccountInput);
+        Task<List<BedStatusPieChartDto>> GetAll(GetAllAccountsInput getAllAccountInput);
     }
 }
