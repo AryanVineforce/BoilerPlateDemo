@@ -18,6 +18,9 @@ import { TeachersubjectComponent } from "./teachersubject/teachersubject.compone
 import { SubjectComponent } from "./subject/subject.component";
 import { EnrollmentComponent } from "./enrollment/enrollment.component";
 import { FileuploadComponent } from "./fileupload/fileupload.component";
+import { BedComponent } from "./bed/bed.component";
+import { PatientComponent } from "./patient/patient.component";
+import { AdmissionComponent } from "./admission/admission.component";
 
 @NgModule({
   imports: [
@@ -64,6 +67,9 @@ import { FileuploadComponent } from "./fileupload/fileupload.component";
           { path: "subject", component: SubjectComponent },
           { path: "enrollment", component: EnrollmentComponent },
           { path: "fileupload", component: FileuploadComponent },
+          { path: "bed", component: BedComponent },
+          { path: "patient", component: PatientComponent },
+          { path: "admission", component: AdmissionComponent },
         ],
       },
     ]),

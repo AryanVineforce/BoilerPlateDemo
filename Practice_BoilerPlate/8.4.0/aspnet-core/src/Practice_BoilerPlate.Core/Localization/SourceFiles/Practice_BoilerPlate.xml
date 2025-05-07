@@ -6,6 +6,12 @@
 	  <text name="CreateNewSubject" value="Create New Subject" />
 	  <text name="EditSubject" value="Edit Subject" />
 	  <text name="CreateNewEnrollment" value="Create New Enrollment" />
+	  <text name="CreateNewBed" value="Create New Bed" />
+	  <text name="EditBed" value="Edit Bed" />
+	  <text name="CreateNewPatient" value="Create New Patient" />
+	  <text name="EditPatient" value="Edit Patient" />
+	  <text name="CreateNewAdmission" value="Create New Admission" />
+	  <text name="EditAdmission" value="Edit Admission" />
 	  <text name="CreateTeacherSubject" value="Create Teacher Subject" />
 	  <!--<text name="EditSubject" value="Edit Subject" />-->
 	 <text name="CreateNewStudent" value="Create New Student" />
