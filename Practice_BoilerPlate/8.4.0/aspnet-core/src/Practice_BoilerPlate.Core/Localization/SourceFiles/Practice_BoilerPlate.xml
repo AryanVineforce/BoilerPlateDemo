@@ -13,6 +13,9 @@
 	  <text name="CreateNewAdmission" value="Create New Admission" />
 	  <text name="EditAdmission" value="Edit Admission" />
 	  <text name="CreateTeacherSubject" value="Create Teacher Subject" />
+	  <text name="BedStatusChart" value="Bed Status Chart" />
+	  <text name="BedList" value="Bed List" />
+	 
 	  <!--<text name="EditSubject" value="Edit Subject" />-->
 	 <text name="CreateNewStudent" value="Create New Student" />
 	 <text name="CreateNewEmployee" value="Create New Employee" />

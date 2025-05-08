@@ -8,6 +8,7 @@ using Practice_BoilerPlate.Students.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -94,7 +95,7 @@ namespace BoilerPlate_New.Beds
         public async Task<PagedResultDto<GetBedDto>> GetAll(GetAllAccountsInput input)
         {
             var query = _bedrepositroty.GetAll()
-        .Where(x => x.TenantId == AbpSession.TenantId);
+       .Where(x => x.TenantId == AbpSession.TenantId);
 
             if (!string.IsNullOrWhiteSpace(input.Keyword))
             {
@@ -106,8 +107,11 @@ namespace BoilerPlate_New.Beds
 
             var totalCount = await query.CountAsync();
 
+            query = !string.IsNullOrWhiteSpace(input.Sorting)
+                ? query.OrderBy(input.Sorting)
+                : query.OrderBy(d => d.CreationTime); // default sorting
+
             var beds = await query
-                .OrderByDescending(b => b.CreationTime)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount)
                 .ToListAsync();

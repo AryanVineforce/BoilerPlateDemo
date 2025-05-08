@@ -22,13 +22,14 @@ namespace Practice_BoilerPlate.BedStatus
         }
         public async Task<List<BedStatusPieChartDto>> GetAll(GetAllAccountsInput input)
         {
-            if (input.IsForChart)
+            if (input.IsForChart == false)
             {
                 var data = await _bedsRepo.GetAll()
-                    .GroupBy(b => b.Status)
+                    .GroupBy(b => new { b.Status, b.Type })
                     .Select(g => new BedStatusPieChartDto
                     {
-                        Status = g.Key.ToString(),
+                        Status = g.Key.Status.ToString(),
+                        Type = g.Key.Type.ToString(),
                         Count = g.Count()
                     })
                     .ToListAsync();
