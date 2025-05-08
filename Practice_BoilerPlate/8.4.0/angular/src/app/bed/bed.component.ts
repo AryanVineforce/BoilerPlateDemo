@@ -50,6 +50,20 @@ export class BedComponent extends PagedListingComponentBase<GetBedDto> {
   // Tab control
   activeTab: string = 'list';
 
+
+  //type
+  public bedTypeChartLabels: string[] = ['ICU', 'General', 'SemiICU'];
+  public bedTypeChartData: any[] = [
+    { data: [0, 0, 0], backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'] }
+  ];
+  public bedTypeChartType: 'pie' | 'bar' | 'line' = 'pie';
+  public bedTypeChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false
+  };
+
+  // Tab control
+
   constructor(
     injector: Injector,
     private _bedService: BedServiceProxy,
@@ -115,7 +129,7 @@ export class BedComponent extends PagedListingComponentBase<GetBedDto> {
         request.keyword,
         request.sorting,
         request.skipCount,
-        request.maxResultCount
+   undefined
       )
       .pipe(finalize(() => finishedCallback()))
       .subscribe(result => {
@@ -142,11 +156,17 @@ export class BedComponent extends PagedListingComponentBase<GetBedDto> {
 
   updateChart(): void {
     const statusCounts = { available: 0, occupied: 0, blocked: 0 };
-  
+     const typeCounts ={icu :0 , general:0 , semiIcu:0}
+     
     this.beds.forEach(bed => {
       if (bed.status === 0) statusCounts.available++;
       else if (bed.status === 1) statusCounts.occupied++;
       else if (bed.status === 2) statusCounts.blocked++;
+    });
+    this.beds.forEach(bed => {
+      if (bed.type === 0) typeCounts.icu++;
+      else if (bed.type === 1) typeCounts.general++;
+      else if (bed.type === 2) typeCounts.semiIcu++;
     });
   
     this.bedStatusChartData = [
@@ -155,6 +175,16 @@ export class BedComponent extends PagedListingComponentBase<GetBedDto> {
           statusCounts.available,
           statusCounts.occupied,
           statusCounts.blocked
+        ],
+        backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56']
+      }
+    ];
+    this.bedTypeChartData = [
+      {
+        data: [
+          typeCounts.icu,
+          typeCounts.general,
+          typeCounts.semiIcu
         ],
         backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56']
       }
