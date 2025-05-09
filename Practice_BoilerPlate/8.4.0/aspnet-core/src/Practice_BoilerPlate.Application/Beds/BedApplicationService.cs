@@ -94,22 +94,19 @@ namespace BoilerPlate_New.Beds
 
         public async Task<PagedResultDto<GetBedDto>> GetAll(GetAllAccountsInput input)
         {
-            var query = _bedrepositroty.GetAll()
-       .Where(x => x.TenantId == AbpSession.TenantId);
-
+            var query = _bedrepositroty.GetAll();
             if (!string.IsNullOrWhiteSpace(input.Keyword))
             {
-                query = query.Where(b =>
-                    b.BedNumber.Contains(input.Keyword) ||
-                    b.Status.ToString().Contains(input.Keyword) ||
-                    b.Type.ToString().Contains(input.Keyword));
+                query = query.Where(d =>
+                d.BedNumber.Contains(input.Keyword) );
             }
-
+            query = !string.IsNullOrWhiteSpace(input.Sorting)
+                     ? query.OrderBy(input.Sorting)
+                     : query.OrderBy(d => d.Status).OrderBy(d => d.BedNumber).OrderBy(b => b.Type);
+                     
             var totalCount = await query.CountAsync();
 
-            query = !string.IsNullOrWhiteSpace(input.Sorting)
-                ? query.OrderBy(input.Sorting)
-                : query.OrderBy(d => d.CreationTime); // default sorting
+           
 
             var beds = await query
                 .Skip(input.SkipCount)

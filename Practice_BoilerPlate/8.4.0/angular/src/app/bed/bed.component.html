@@ -113,7 +113,7 @@
             <table class="table table-striped table-bordered" [busy]="isTableLoading">
               <thead class="bg-light">
                 <tr>
-                  <th (click)="changeSorting('name')" style="cursor: pointer;">
+                  <th (click)="changeSorting('bedNumber')" style="cursor: pointer;">
                     {{ "Bed Number" | localize }}
                     <i
                       class="ml-1 fas"
@@ -124,7 +124,7 @@
                       }"
                     ></i>
                   </th>
-                  <th (click)="changeSorting('name')" style="cursor: pointer;">
+                  <th (click)="changeSorting('type')" style="cursor: pointer;">
                     {{ "Type" | localize }}
                     <i
                       class="ml-1 fas"
@@ -135,7 +135,7 @@
                       }"
                     ></i>
                   </th>
-                  <th (click)="changeSorting('name')" style="cursor: pointer;">
+                  <th (click)="changeSorting('status')" style="cursor: pointer;">
                     {{ "Status" | localize }}
                     <i
                       class="ml-1 fas"

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,22 +46,47 @@ namespace Practice_BoilerPlate.Admissions
         }
 
         public async Task<PagedResultDto<GetAdmissionDto>> GetAll(GetAllAccountsInput input)
-        {
-            var query = _addrepo.GetAllIncluding(e => e.Patient, e => e.Bed);
+            {
+            var query = _addrepo.GetAllIncluding(x => x.Patient, x => x.Bed)
+       .Where(x => x.TenantId == AbpSession.TenantId);
 
+            // Filtering
             if (!string.IsNullOrWhiteSpace(input.Keyword))
             {
-                query = query.Where(s =>
-                    s.Notes.Contains(input.Keyword) ||
-                    s.Patient.Name.Contains(input.Keyword) ||
-                    s.Bed.BedNumber.Contains(input.Keyword)
+                query = query.Where(x =>
+                    x.Patient.Name.Contains(input.Keyword) ||
+                    x.Bed.BedNumber.Contains(input.Keyword) ||
+                    x.Notes.Contains(input.Keyword)
                 );
             }
 
-            //query = !string.IsNullOrWhiteSpace(input.Sorting)
-            //    ? query.OrderBy(input.Sorting)
-            //    : query.OrderBy(d => d.BedId);
+            // Mapping UI sort field to actual entity fields
+            var sortingMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    {
+        { "patientName", "Patient.Name" },
+        { "bedNumber", "Bed.BedNumber" },
+        { "admitDate", "AdmitDate" },
+        { "dischargeDate", "DischargeDate" },
+        { "notes", "Notes" }
+    };
 
+            string sorting = "AdmitDate desc"; // default sort
+
+            if (!string.IsNullOrWhiteSpace(input.Sorting))
+            {
+                var sortParts = input.Sorting.Trim().Split(' ');
+                var sortField = sortParts[0];
+                var sortDirection = sortParts.Length > 1 ? sortParts[1] : "asc";
+
+                if (sortingMap.ContainsKey(sortField))
+                {
+                    sorting = $"{sortingMap[sortField]} {sortDirection}";
+                }
+            }
+
+            query = query.OrderBy(sorting);
+
+            // Paging
             var totalCount = await query.CountAsync();
 
             var admissions = await query
@@ -72,9 +98,9 @@ namespace Practice_BoilerPlate.Admissions
             {
                 Id = admission.Id,
                 PatientId = admission.PatientId,
-                PatientName = admission.Patient?.Name ?? "Unknown",
+                PatientName = admission.Patient?.Name ?? "",
                 BedId = admission.BedId,
-                BedNumber = admission.Bed?.BedNumber ?? "Unknown",
+                BedNumber = admission.Bed?.BedNumber ?? "",
                 AdmitDate = admission.AdmitDate,
                 DischargeDate = admission.DischargeDate,
                 Notes = admission.Notes

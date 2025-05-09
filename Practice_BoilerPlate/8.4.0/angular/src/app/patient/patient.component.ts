@@ -15,11 +15,12 @@ import {
 import { CreatePatientDialogComponent } from "./create-patient/create-patient-dialog.component";
 import { EditPatientDialogComponent } from "./edit-patient/edit-patient-dialog.component";
 
-class PagedStudentsRequestDto extends PagedRequestDto {
+class PagedPatientRequestDto extends PagedRequestDto {
   keyword: string;
   isActive: boolean | null;
+  sorting: string;
 }
-
+import { ChartOptions } from "chart.js";
 
 @Component({
   selector: 'app-patient',
@@ -31,7 +32,29 @@ export class PatientComponent extends PagedListingComponentBase<GetPatientDto> {
   keyword = "";
   isActive: boolean | null;
   advancedFiltersVisible = false;
+  sorting = "name asc";
 
+  
+//  Chart data
+  public genderChartLabels: string[] = ["Male", "Female", "Other"];
+  public genderChartData: any[] = [
+    { data: [0, 0, 0], backgroundColor: ["#4E79A7", "#A0CBE8", "#F28E2B"] },
+  ];
+  public genderChartType: "pie" | "bar" | "line" = "pie";
+  public genderChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+  public diseaseChartLabels: string[] = ["Abc", "MonkeyPox", "ChickenPox"];
+  public diseaseChartData: any[] = [
+    { data: [0, 0, 0], backgroundColor: ["#4E79A7", "#A0CBE8", "#F28E2B"] },
+  ];
+  public diseaseChartType: "bar" = "bar"
+  public diseaseChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+  activeTab: string = "list";
   constructor(
     injector: Injector,
     private _patienservice: PatientServiceProxy,
@@ -80,25 +103,28 @@ export class PatientComponent extends PagedListingComponentBase<GetPatientDto> {
 
   protected list(
     
-    request: PagedStudentsRequestDto,
+    request: PagedPatientRequestDto,
     pageNumber: number,
     finishedCallback: Function
   ): void {
     debugger
     request.keyword = this.keyword;
     request.isActive = this.isActive;
+    request.sorting = this.sorting;
 
     this._patienservice
       .getAll(
         request.keyword,
-      undefined,              
+      request.sorting,              
       request.skipCount,
-      request.maxResultCount
+      request.maxResultCount,
+      
       )
       .pipe(finalize(() => finishedCallback()))
       .subscribe((result: any) => {
         this.patients = result.items;
         this.showPaging(result, pageNumber);
+        this.updateChart();
       });
   }
 
@@ -123,5 +149,45 @@ export class PatientComponent extends PagedListingComponentBase<GetPatientDto> {
       case 2: return 'Other';
       default: return 'Unknown';
     }
+}
+changeSorting(field: string): void {
+  const isAsc = this.sorting === `${field} asc`;
+  this.sorting = isAsc ? `${field} desc` : `${field} asc`;
+  this.refresh();
+}
+updateChart(): void {
+  const genderCounts = { male: 0, female: 0, other: 0 };
+  const diseaseCounts = { abc: 0, monkeypox: 0, chickenpox: 0 };
+
+  this.patients.forEach((gender) => {
+    if (gender. gender=== 0) genderCounts.male++;
+    else if (gender.gender === 1) genderCounts.female++;
+    else if (gender.gender === 2) genderCounts.other++;
+  });
+  this.patients.forEach((p) => {
+    if (p.disease?.toLowerCase() === 'abc') diseaseCounts.abc++;
+    else if (p.disease?.toLowerCase() === 'monkeypox') diseaseCounts.monkeypox++;
+    else if (p.disease?.toLowerCase() === 'chickenpox') diseaseCounts.chickenpox++;
+  });
+  this.genderChartData = [
+    {
+      data: [
+        genderCounts.male,
+        genderCounts.female,
+        genderCounts.other,
+      ],
+      backgroundColor: ["#4E79A7", "#A0CBE8", "#F28E2B",],
+    },
+  ];
+  this.diseaseChartData = [
+    {
+      data: [
+        diseaseCounts.abc,
+        diseaseCounts.monkeypox,
+        diseaseCounts.chickenpox,
+      ],
+      backgroundColor: ["#4E79A7", "#A0CBE8", "#F28E2B",],
+    },
+  ];
 }
 }
