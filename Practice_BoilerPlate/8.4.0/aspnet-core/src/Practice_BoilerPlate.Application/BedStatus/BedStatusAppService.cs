@@ -30,7 +30,7 @@ namespace Practice_BoilerPlate.BedStatus
                     {
                         Status = g.Key.Status.ToString(),
                         Type = g.Key.Type.ToString(),
-                        Count = g.Count()
+                        
                     })
                     .ToListAsync();
 

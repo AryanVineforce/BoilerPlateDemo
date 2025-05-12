@@ -61,7 +61,7 @@ export class BedComponent extends PagedListingComponentBase<GetBedDto> {
     maintainAspectRatio: false,
   };
 
-  // Tab control
+
 
   constructor(
     injector: Injector,
@@ -120,7 +120,7 @@ export class BedComponent extends PagedListingComponentBase<GetBedDto> {
     request.sorting = this.sorting;
 
     this._bedService
-      .getAll(request.keyword, request.sorting, request.skipCount, undefined)
+      .getAll(request.keyword, request.sorting, request.skipCount, request.maxResultCount)
       .pipe(finalize(() => finishedCallback()))
       .subscribe((result) => {
         this.beds = result.items;
@@ -129,6 +129,7 @@ export class BedComponent extends PagedListingComponentBase<GetBedDto> {
       });
   }
 
+  
   protected delete(bed: GetBedDto): void {
     abp.message.confirm(
       this.l("DeleteWarningMessage", bed.id),

@@ -14,6 +14,8 @@
 	  <text name="EditAdmission" value="Edit Admission" />
 	  <text name="CreateTeacherSubject" value="Create Teacher Subject" />
 	  <text name="BedStatusChart" value="Bed Status Chart" />
+	  <text name="PatientList" value="Patient List" />
+	  <text name="GenderChart" value="Gender Chart" />
 	  <text name="BedList" value="Bed List" />
 	 
 	  <!--<text name="EditSubject" value="Edit Subject" />-->

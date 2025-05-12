@@ -117,18 +117,16 @@
               <table class="table table-striped table-bordered" [busy]="isTableLoading">
                 <thead class="bg-light">
                   <tr>
-                    <th (click)="changeSorting('name')" style="cursor: pointer;">
+                    <th (click)="changeSorting('PatientName')" style="cursor: pointer;">
                       {{ "PatientName" | localize }}
-                      <i
-                        class="ml-1 fas"
-                        [ngClass]="{
-                          'fa-arrow-up text-primary': sorting === 'name asc',
-                          'fa-arrow-down text-primary': sorting === 'name desc',
-                          'fa-sort text-muted': sorting !== 'name asc' && sorting !== 'name desc'
-                        }"
-                      ></i>
+                      <i class="ml-1 fas"
+                         [ngClass]="{
+                           'fa-arrow-up text-primary': sorting === 'name asc',
+                           'fa-arrow-down text-primary': sorting === 'name desc',
+                           'fa-sort text-muted': sorting !== 'name asc' && sorting !== 'name desc'
+                         }"></i>
                     </th>
-                    <th (click)="changeSorting('name')" style="cursor: pointer;">
+                    <th (click)="changeSorting('BedNumber')" style="cursor: pointer;">
                       {{ "BedNumber" | localize }}
                       <i
                         class="ml-1 fas"
@@ -139,7 +137,7 @@
                         }"
                       ></i>
                     </th>
-                    <th (click)="changeSorting('name')" style="cursor: pointer;">
+                    <th (click)="changeSorting('AdmitDate')" style="cursor: pointer;">
                       {{ "AdmitDate" | localize }}
                       <i
                         class="ml-1 fas"
@@ -150,7 +148,7 @@
                         }"
                       ></i>
                     </th>
-                    <th (click)="changeSorting('name')" style="cursor: pointer;">
+                    <th (click)="changeSorting('DischargeDate')" style="cursor: pointer;">
                       {{ "DischargeDate" | localize }}
                       <i
                         class="ml-1 fas"
@@ -161,7 +159,7 @@
                         }"
                       ></i>
                     </th>
-                    <th (click)="changeSorting('name')" style="cursor: pointer;">
+                    <th (click)="changeSorting('Notes')" style="cursor: pointer;">
                       {{ "Notes" | localize }}
                       <i
                         class="ml-1 fas"
