@@ -21,7 +21,8 @@ class PagedPatientRequestDto extends PagedRequestDto {
   sorting: string;
 }
 import { ChartOptions } from "chart.js";
-
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
@@ -93,6 +94,31 @@ export class PatientComponent extends PagedListingComponentBase<GetPatientDto> {
      });
   }
   
+exportToExcel(): void {
+  const worksheet = XLSX.utils.json_to_sheet(this.patients.map(p => ({
+    Name: p.name,
+    Age: p.age,
+    Gender: this.getGenderString(p.gender),
+    Disease: p.disease,
+    Doctor:p.doctor
+   
+    
+  })));
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Patients');
+
+  const excelBuffer: any = XLSX.write(workbook, {
+    bookType: 'xlsx',
+    type: 'array'
+  });
+
+  const blob = new Blob([excelBuffer], {
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  });
+
+  FileSaver.saveAs(blob, `Patient_List_${new Date().getTime()}.xlsx`);
+}
 
 
   clearFilters(): void {
