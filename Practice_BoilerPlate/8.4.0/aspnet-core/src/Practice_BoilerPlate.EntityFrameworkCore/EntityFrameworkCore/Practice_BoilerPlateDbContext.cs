@@ -16,6 +16,8 @@ using Practice_BoilerPlate.FileUploads;
 using BoilerPlate_New.Beds;
 using Practice_BoilerPlate.Patients;
 using Practice_BoilerPlate.Addmissions;
+using Practice_BoilerPlate.Deals;
+using Practice_BoilerPlate.Task;
 
 namespace Practice_BoilerPlate.EntityFrameworkCore
 {
@@ -40,6 +42,8 @@ namespace Practice_BoilerPlate.EntityFrameworkCore
         public DbSet<Bed> Beds { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Addmisson> Addmissions { get; set; }
+        public DbSet<Deal> Deals { get; set; }
+        public DbSet<Task_Item> TasksItems { get; set; }
 
 
 

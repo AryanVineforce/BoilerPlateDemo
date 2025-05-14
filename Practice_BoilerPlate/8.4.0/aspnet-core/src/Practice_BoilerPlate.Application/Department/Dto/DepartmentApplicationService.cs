@@ -21,7 +21,7 @@ namespace Practice_BoilerPlate.Department
 
         }
 
-        public async Task CreateAsync(DepartmentCreateUpdateDto input)
+        public async System.Threading.Tasks.Task CreateAsync(DepartmentCreateUpdateDto input)
         {
             var department = new Departmentt
             {
@@ -37,7 +37,7 @@ namespace Practice_BoilerPlate.Department
             
         }
 
-        public async Task DeleteAsync(EntityDto<int> input)
+        public async System.Threading.Tasks.Task DeleteAsync(EntityDto<int> input)
         {
             await _departmentrepository.DeleteAsync(input.Id);
         }
@@ -81,7 +81,7 @@ namespace Practice_BoilerPlate.Department
         }
 
 
-        public async Task UpdateAsync(UpdateDepartmentDto input)
+        public async System.Threading.Tasks.Task UpdateAsync(UpdateDepartmentDto input)
         {
             var department = await _departmentrepository.GetAsync(input.Id);
             department.Name = input.Name;

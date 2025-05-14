@@ -25,7 +25,7 @@ namespace Practice_BoilerPlate.Students
             _repositoryStudent = repositoryStudent;
         }
 
-        public async Task CreateAsync(CreateStudentDto input)
+        public async System.Threading.Tasks.Task CreateAsync(CreateStudentDto input)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace Practice_BoilerPlate.Students
           result);
         }
 
-        public async Task UpdateAsync(UpdateStudentDto input)
+        public async System.Threading.Tasks.Task UpdateAsync(UpdateStudentDto input)
         {
             var student = await _repositoryStudent.GetAsync(input.Id);
             student.Id = input.Id;
@@ -136,7 +136,7 @@ namespace Practice_BoilerPlate.Students
 
             await _repositoryStudent.UpdateAsync(student);
         }
-        public async Task DeleteAsync(EntityDto<int> input)
+        public async System.Threading.Tasks.Task DeleteAsync(EntityDto<int> input)
         {
             await _repositoryStudent.DeleteAsync(input.Id);
         }

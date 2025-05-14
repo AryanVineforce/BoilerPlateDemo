@@ -5,11 +5,9 @@ using Abp.UI;
 
 using Microsoft.EntityFrameworkCore;
 using Practice_BoilerPlate.Patients.Dto;
-using Practice_BoilerPlate.PatientStatus.Dto;
 using Practice_BoilerPlate.Students.Dto;
-using System.Collections.Generic;
+
 using System.Linq;
-using System.Linq.Dynamic.Core  ;
 
 using System.Threading.Tasks;
 
@@ -23,7 +21,7 @@ namespace Practice_BoilerPlate.Patients
             _patientRepo = patientRepo;
         }
 
-        public async Task CreateAsync(CreateUpdatePatientDto input)
+        public async System.Threading.Tasks.Task CreateAsync(CreateUpdatePatientDto input)
         {
              var department = new Patient
             {
@@ -40,7 +38,7 @@ namespace Practice_BoilerPlate.Patients
            
         }
 
-        public async Task DeleteAsync(EntityDto<int> input)
+        public async System.Threading.Tasks.Task DeleteAsync(EntityDto<int> input)
         {
             await _patientRepo.DeleteAsync(input.Id);
         }
@@ -48,25 +46,21 @@ namespace Practice_BoilerPlate.Patients
         public async Task<PagedResultDto<GetPatientDto>> GetAll(GetAllAccountsInput input)
         {
             var query = _patientRepo.GetAll()
-         .Where(x => x.TenantId == AbpSession.TenantId);
+       .Where(x => x.TenantId == AbpSession.TenantId);
 
             if (!string.IsNullOrWhiteSpace(input.Keyword))
             {
-                query = query.Where(d =>
-                d.Name.Contains(input.Keyword) ||
-                    d.Disease.Contains(input.Keyword) ||
-                    d.Doctor.Contains(input.Keyword));
+                query = query.Where(p =>
+                    p.Name.Contains(input.Keyword) ||
+                    p.Gender.ToString().Contains(input.Keyword) ||
+                    p.Disease.Contains(input.Keyword) ||
+                    p.Doctor.Contains(input.Keyword));
             }
-
-                // Apply dynamic sorting
-                query = !string.IsNullOrWhiteSpace(input.Sorting)
-                ? query.OrderBy(input.Sorting)
-                : query.OrderBy(d => d.Name); // Default sorting
 
             var totalCount = await query.CountAsync();
 
-            // Do not override the previous sorting
             var patients = await query
+                .OrderByDescending(p => p.CreationTime)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount)
                 .ToListAsync();
@@ -84,33 +78,9 @@ namespace Practice_BoilerPlate.Patients
             return new PagedResultDto<GetPatientDto>(totalCount, result);
         }
 
-        public async Task<List<DiseaseStatusPieChartDto>> GetallDisease()
-        {
-            var data = await _patientRepo.GetAll()
-       .GroupBy(p => p.Disease)
-        .Select(g => new DiseaseStatusPieChartDto
-        {
-            Disease = g.Key.ToString()
-        })
-       .ToListAsync();
+        
 
-            return data;
-        }
-
-        public async Task <List<GenderStatusPieChartDto>> GetallGender()
-        {
-             var data = await _patientRepo.GetAll()
-       .GroupBy(p => p.Gender)
-        .Select(g => new GenderStatusPieChartDto
-       {
-           Gender = g.Key.ToString()
-       })
-       .ToListAsync();
-
-            return data;
-        }
-
-        public async Task UpdateAsync(CreateUpdatePatientDto input)
+        public async System.Threading.Tasks.Task UpdateAsync(CreateUpdatePatientDto input)
         {
             var patient = await _patientRepo.GetAsync((int)input.Id);
 

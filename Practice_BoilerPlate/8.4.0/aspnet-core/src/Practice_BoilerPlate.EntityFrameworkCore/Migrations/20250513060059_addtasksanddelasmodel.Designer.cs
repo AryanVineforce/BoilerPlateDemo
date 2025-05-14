@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Practice_BoilerPlate.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Practice_BoilerPlate.EntityFrameworkCore;
 namespace Practice_BoilerPlate.Migrations
 {
     [DbContext(typeof(Practice_BoilerPlateDbContext))]
-    partial class Practice_BoilerPlateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250513060059_addtasksanddelasmodel")]
+    partial class addtasksanddelasmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2301,7 +2304,7 @@ namespace Practice_BoilerPlate.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("Practice_BoilerPlate.Task.Task_Item", b =>
+            modelBuilder.Entity("Practice_BoilerPlate.Tasks.Task", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2355,7 +2358,7 @@ namespace Practice_BoilerPlate.Migrations
 
                     b.HasIndex("DealId");
 
-                    b.ToTable("TasksItems");
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("Practice_BoilerPlate.TeacherSubjects.TeacherSubject", b =>
@@ -2767,10 +2770,10 @@ namespace Practice_BoilerPlate.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("Practice_BoilerPlate.Task.Task_Item", b =>
+            modelBuilder.Entity("Practice_BoilerPlate.Tasks.Task", b =>
                 {
                     b.HasOne("Practice_BoilerPlate.Deals.Deal", "Deal")
-                        .WithMany("Taskitem")
+                        .WithMany("Tasks")
                         .HasForeignKey("DealId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -2870,7 +2873,7 @@ namespace Practice_BoilerPlate.Migrations
 
             modelBuilder.Entity("Practice_BoilerPlate.Deals.Deal", b =>
                 {
-                    b.Navigation("Taskitem");
+                    b.Navigation("Tasks");
                 });
 
             modelBuilder.Entity("Practice_BoilerPlate.Departments.Departmentt", b =>

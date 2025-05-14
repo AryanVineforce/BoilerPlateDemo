@@ -14,8 +14,8 @@ namespace Practice_BoilerPlate.Admissions
     internal interface IAdmissionAppService:IApplicationService
     {
         Task<PagedResultDto<GetAdmissionDto>> GetAll(GetAllAccountsInput getAllAccountsInput);
-        Task CreateAsync(CreateUpdateAdmissionDto input);
-        Task UpdateAsync(CreateUpdateAdmissionDto input);
-        Task DeleteAsync(EntityDto<int> input);
+        System.Threading.Tasks.Task CreateAsync(CreateUpdateAdmissionDto input);
+        System.Threading.Tasks.Task UpdateAsync(CreateUpdateAdmissionDto input);
+        System.Threading.Tasks.Task DeleteAsync(EntityDto<int> input);
     }
 }

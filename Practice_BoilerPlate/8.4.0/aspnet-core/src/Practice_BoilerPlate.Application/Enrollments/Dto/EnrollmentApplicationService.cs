@@ -22,7 +22,7 @@ namespace Practice_BoilerPlate.Enrollments.Dto
             
         }
 
-        public async Task CreateAsync(EnrollmentCreateUpdateDto input)
+        public async System.Threading.Tasks.Task CreateAsync(EnrollmentCreateUpdateDto input)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Practice_BoilerPlate.Enrollments.Dto
             }
         }
 
-        public async Task DeleteAsync(EntityDto<int> input)
+        public async System.Threading.Tasks.Task DeleteAsync(EntityDto<int> input)
         {
             await _enrollmentsRepository.DeleteAsync(input.Id);
         }
@@ -84,7 +84,7 @@ namespace Practice_BoilerPlate.Enrollments.Dto
                 );
         }
 
-        public async Task UpdateAsync(EnrollmentCreateUpdateDto input)
+        public async System.Threading.Tasks.Task UpdateAsync(EnrollmentCreateUpdateDto input)
         {
             try
             {
