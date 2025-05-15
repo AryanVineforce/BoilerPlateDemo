@@ -21,6 +21,7 @@ import { FileuploadComponent } from "./fileupload/fileupload.component";
 import { BedComponent } from "./bed/bed.component";
 import { PatientComponent } from "./patient/patient.component";
 import { AdmissionComponent } from "./admission/admission.component";
+import { DealsServiceComponent } from "./deals-service/deals-service.component";
 
 @NgModule({
   imports: [
@@ -70,6 +71,7 @@ import { AdmissionComponent } from "./admission/admission.component";
           { path: "bed", component: BedComponent },
           { path: "patient", component: PatientComponent },
           { path: "admission", component: AdmissionComponent },
+          { path: "deals-service", component: DealsServiceComponent },
         ],
       },
     ]),

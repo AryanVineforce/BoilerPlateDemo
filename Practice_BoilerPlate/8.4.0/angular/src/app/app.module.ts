@@ -83,6 +83,9 @@ import { AdmissionComponent } from './admission/admission.component';
 import { CreateAdmissionDialogComponent } from './admission/create-admission/create-admission-dialog.component';
 import { EditAdmissionDialogComponent } from './admission/edit-admission/edit-admission-dialog.component';
 import { NgChartsModule } from 'ng2-charts';
+import { DealsServiceComponent } from './deals-service/deals-service.component';
+import { CreateDealDialogComponent } from './deals-service/create-deal/create-deal-dialog.component';
+import { EditDealDialogComponent } from './deals-service/edit-deal/edit-deal-dialog.component';
 
 @NgModule({
     declarations: [
@@ -152,7 +155,9 @@ import { NgChartsModule } from 'ng2-charts';
         AdmissionComponent,
         CreateAdmissionDialogComponent,
         EditAdmissionDialogComponent,
-    
+        DealsServiceComponent,
+        CreateDealDialogComponent,
+        EditDealDialogComponent,
       
       
      

@@ -8,8 +8,8 @@ import * as ApiServiceProxies from './service-proxies';
     providers: [
         ApiServiceProxies.StudentServiceProxy ,
         ApiServiceProxies.BedServiceProxy ,
-
         ApiServiceProxies.SubejctServiceProxy ,
+        ApiServiceProxies.DealWithTasksServiceProxy ,
         ApiServiceProxies.BedStatusServiceProxy ,
         ApiServiceProxies.AdmissionsServiceProxy ,
         ApiServiceProxies.PatientServiceProxy ,
@@ -17,7 +17,7 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.EnrollmentServiceProxy ,
         ApiServiceProxies.TeacherServiceProxy,
         ApiServiceProxies.AddressServiceProxy,
-        ApiServiceProxies. EmployeeServiceProxy,
+        ApiServiceProxies.EmployeeServiceProxy,
         ApiServiceProxies.DepartmentServiceProxy,
         ApiServiceProxies.FileServiceProxy,
         ApiServiceProxies.CourseServiceProxy,

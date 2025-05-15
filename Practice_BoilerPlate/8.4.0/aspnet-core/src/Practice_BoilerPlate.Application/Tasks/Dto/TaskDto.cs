@@ -9,7 +9,7 @@ namespace Practice_BoilerPlate.Task.Dto
 {
     public class TaskDto: Entity<int>
     {
-   
+        public int TaskNo { get; set; }
         public string Title { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime ToDate { get; set; }

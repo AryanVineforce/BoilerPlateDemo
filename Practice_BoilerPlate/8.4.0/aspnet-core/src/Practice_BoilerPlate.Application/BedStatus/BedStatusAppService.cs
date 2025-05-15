@@ -22,8 +22,8 @@ namespace Practice_BoilerPlate.BedStatus
         }
         public async Task<List<BedStatusPieChartDto>> GetAll(GetAllAccountsInput input)
         {
-            if (input.IsForChart == false)
-            {
+           
+            
                 var data = await _bedsRepo.GetAll()
                     .GroupBy(b => new { b.Status, b.Type })
                     .Select(g => new BedStatusPieChartDto
@@ -35,7 +35,7 @@ namespace Practice_BoilerPlate.BedStatus
                     .ToListAsync();
 
                 return data;
-            }
+            
 
             // Otherwise, handle regular paged list request (for bed table)
             throw new NotImplementedException("Regular list not implemented here.");

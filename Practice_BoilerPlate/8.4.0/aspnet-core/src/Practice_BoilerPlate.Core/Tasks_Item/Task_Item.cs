@@ -22,9 +22,6 @@ namespace Practice_BoilerPlate.Task
         public int DealId { get; set; }
         public Deal Deal { get; set; }
 
-        public static implicit operator Task_Item(Task_Item v)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }
