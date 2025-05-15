@@ -17,6 +17,8 @@
 	  <text name="PatientList" value="Patient List" />
 	  <text name="GenderChart" value="Gender Chart" />
 	  <text name="BedList" value="Bed List" />
+	  <text name="CreateNewDeal" value="Create New Deal" />
+	  <text name="EditDeal" value="Edit Deal" />
 	 
 	  <!--<text name="EditSubject" value="Edit Subject" />-->
 	 <text name="CreateNewStudent" value="Create New Student" />

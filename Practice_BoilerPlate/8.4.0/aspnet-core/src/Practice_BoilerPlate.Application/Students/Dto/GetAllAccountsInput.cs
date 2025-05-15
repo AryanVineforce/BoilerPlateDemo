@@ -12,6 +12,6 @@ namespace Practice_BoilerPlate.Students.Dto
     {
         public string Keyword { get; set; }
 
-        public bool IsForChart { get; set; } = false;
+   
     }
 }
