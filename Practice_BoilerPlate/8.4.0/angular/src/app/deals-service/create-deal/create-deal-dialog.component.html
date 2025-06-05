@@ -5,11 +5,11 @@
   (ngSubmit)="save()"
 >
   <abp-modal-header
-    [title]="'CreateNewDeal' | localize"
+    [title]="'CreateNewTemplate' | localize"
     (onCloseClick)="bsModalRef.hide()"
   ></abp-modal-header>
 
-  <div class="modal-body" style="max-width: 1000px; margin: auto">
+<div class="modal-body" style="width: 100%; max-width: 90vw; margin: auto;">
     <!-- Deal Name & Deal Date Side by Side -->
     <div class="form-row">
       <!-- Deal Name -->
@@ -18,13 +18,14 @@
         <input
           type="text"
           class="form-control"
-          id="dealName"
-          name="dealName"
+          id="templateName"
+          name="templateName"
           required
           [(ngModel)]="deal.dealName"
           pattern="^[a-zA-Z\s]+$"
           #dealModel="ngModel"
           #dealEl
+          placeholder="Enter Deal Name"
         />
         <div *ngIf="dealModel.invalid && dealModel.touched" class="text-danger">
           <div *ngIf="dealModel.errors?.pattern">
@@ -75,6 +76,7 @@
                   name="taskNo{{ i }}"
                   [(ngModel)]="task.taskNo"
                 required
+                placeholder="Enter task no"
                 />
               </td>
               <td>
@@ -87,6 +89,7 @@
                   #taskModel="ngModel"
                   #tasklEl
                   required
+                  placeholder="Enter task title"
                 />
                 <abp-validation-summary
                   [control]="taskModel"
@@ -122,6 +125,7 @@
                   #desModel="ngModel"
                    #deslEl 
                    required
+                   placeholder="Enter task description"
                 />
                  <abp-validation-summary
                   [control]="desModel"

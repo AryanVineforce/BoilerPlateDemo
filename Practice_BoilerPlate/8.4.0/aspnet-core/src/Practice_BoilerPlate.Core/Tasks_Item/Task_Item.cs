@@ -2,11 +2,6 @@
 using Abp.Domain.Entities;
 using Practice_BoilerPlate.Deals;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Practice_BoilerPlate.Task
 {
     public class Task_Item: FullAuditedEntity<int>, IMustHaveTenant
@@ -21,7 +16,5 @@ namespace Practice_BoilerPlate.Task
 
         public int DealId { get; set; }
         public Deal Deal { get; set; }
-
-      
     }
 }
