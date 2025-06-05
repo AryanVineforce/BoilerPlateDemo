@@ -10,8 +10,6 @@ namespace Practice_BoilerPlate.Deals.Dto
 {
     public class DealDto:Entity<int>
     {
-
-
         public string DealName { get; set; }
         public DateTime Date { get; set; }
         public List<TaskDto> Tasks { get; set; }

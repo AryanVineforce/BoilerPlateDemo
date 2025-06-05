@@ -10,7 +10,6 @@ using Practice_BoilerPlate.Task.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Practice_BoilerPlate.Deals
@@ -25,9 +24,6 @@ namespace Practice_BoilerPlate.Deals
             _dealrepo = dealrepo;
             _taskitemrepo = taskrepo;
         }
-
-
-
         public async Task<DealDto> CreateDealWithTasksAsync(CreateUpdateDealDto input)
         {
             try
@@ -89,7 +85,6 @@ namespace Practice_BoilerPlate.Deals
                 throw new UserFriendlyException("An error occurred while creating the deal: " + ex.Message);
             }
         }
-
         public async Task<DealDto> DeleteAsync(EntityDto<int> input)
         {
             var deal = await _dealrepo.GetAsync(input.Id);
